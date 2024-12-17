@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fun Fact Generator</title>
     <style>
-        /* CSS Styles */
+        /* General Reset */
         * {
             margin: 0;
             padding: 0;
@@ -13,79 +13,167 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom right, #4facfe, #00f2fe);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             text-align: center;
+            color: #333;
+            overflow: hidden;
         }
 
         .container {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            max-width: 500px;
-            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            animation: fadeIn 1s ease-in-out;
+            position: relative;
         }
 
         h1 {
-            color: #333;
+            font-size: 2.5rem;
+            color: #007bff;
             margin-bottom: 20px;
         }
 
         p {
-            font-size: 18px;
-            color: #555;
+            font-size: 1.2rem;
+            color: #444;
             margin: 20px 0;
+            line-height: 1.6;
+            animation: slideIn 0.7s ease-in-out;
+        }
+
+        img {
+            width: 150px;
+            height: 150px;
+            margin: 10px auto;
+            display: block;
+            animation: bounce 1.5s infinite;
         }
 
         button {
             background-color: #007bff;
             color: #fff;
             border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 25px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 10px;
         }
 
         button:hover {
             background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
     </style>
 </head>
 <body>
-    <!-- HTML Content -->
     <div class="container">
-        <h1>Random Fun Fact Generator</h1>
-        <p id="fact">Click the button to see a fun fact!</p>
+        <h1>🌟 Random Fun Fact 🌟</h1>
+        <img id="factImage" src="https://via.placeholder.com/150" alt="Fun Image">
+        <p id="fact">Click the button to discover an amazing fact!</p>
         <button id="generateFact">Generate Fun Fact</button>
     </div>
 
     <script>
-        // JavaScript Logic
+        // Array of fun facts with corresponding image URLs
         const facts = [
-            "Earth is the only planet in our solar system not named after a god.",
-            "Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible.",
-            "Bananas are berries, but strawberries are not.",
-            "Octopuses have three hearts, and two of them stop beating when they swim.",
-            "The Eiffel Tower can grow more than six inches taller during hot days due to metal expansion.",
-            "Sharks existed before trees did, around 400 million years ago.",
-            "Wombat poop is cube-shaped to prevent it from rolling away.",
-            "A day on Venus is longer than a year on Venus.",
-            "There are more stars in the universe than grains of sand on all the Earth's beaches.",
-            "Sloths can hold their breath longer than dolphins—up to 40 minutes."
+            {
+                text: "Earth is the only planet in our solar system not named after a god.",
+                image: "https://cdn-icons-png.flaticon.com/512/616/616553.png"
+            },
+            {
+                text: "Honey never spoils. Archaeologists found pots of honey in Egyptian tombs still edible after 3,000 years.",
+                image: "https://cdn-icons-png.flaticon.com/512/2026/2026535.png"
+            },
+            {
+                text: "Bananas are berries, but strawberries are not!",
+                image: "https://cdn-icons-png.flaticon.com/512/415/415682.png"
+            },
+            {
+                text: "Octopuses have three hearts, and two of them stop beating when they swim.",
+                image: "https://cdn-icons-png.flaticon.com/512/2921/2921827.png"
+            },
+            {
+                text: "The Eiffel Tower grows taller during summer due to metal expansion.",
+                image: "https://cdn-icons-png.flaticon.com/512/1976/1976403.png"
+            },
+            {
+                text: "Sharks existed before trees, around 400 million years ago.",
+                image: "https://cdn-icons-png.flaticon.com/512/2104/2104615.png"
+            },
+            {
+                text: "Wombat poop is cube-shaped to prevent it from rolling away.",
+                image: "https://cdn-icons-png.flaticon.com/512/1998/1998615.png"
+            },
+            {
+                text: "A day on Venus is longer than a year on Venus.",
+                image: "https://cdn-icons-png.flaticon.com/512/1321/1321796.png"
+            },
+            {
+                text: "There are more stars in the universe than grains of sand on all the Earth's beaches.",
+                image: "https://cdn-icons-png.flaticon.com/512/1046/1046750.png"
+            },
+            {
+                text: "Sloths can hold their breath longer than dolphins—up to 40 minutes.",
+                image: "https://cdn-icons-png.flaticon.com/512/1864/1864520.png"
+            }
         ];
 
+        // Function to generate a random fact
         function generateFact() {
             const randomIndex = Math.floor(Math.random() * facts.length);
-            document.getElementById("fact").innerText = facts[randomIndex];
+            const fact = facts[randomIndex];
+            document.getElementById("fact").innerText = fact.text;
+            document.getElementById("factImage").src = fact.image;
+
+            // Add animation
+            document.getElementById("fact").style.animation = "none";
+            void document.getElementById("fact").offsetWidth; // Trigger reflow
+            document.getElementById("fact").style.animation = "slideIn 0.7s ease-in-out";
         }
 
+        // Add event listener to the button
         document.getElementById("generateFact").addEventListener("click", generateFact);
     </script>
 </body>
