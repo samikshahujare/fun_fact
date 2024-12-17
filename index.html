@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Fact Generator</title>
+    <style>
+        /* CSS Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+            margin: 20px 0;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- HTML Content -->
+    <div class="container">
+        <h1>Random Fun Fact Generator</h1>
+        <p id="fact">Click the button to see a fun fact!</p>
+        <button id="generateFact">Generate Fun Fact</button>
+    </div>
+
+    <script>
+        // JavaScript Logic
+        const facts = [
+            "Earth is the only planet in our solar system not named after a god.",
+            "Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible.",
+            "Bananas are berries, but strawberries are not.",
+            "Octopuses have three hearts, and two of them stop beating when they swim.",
+            "The Eiffel Tower can grow more than six inches taller during hot days due to metal expansion.",
+            "Sharks existed before trees did, around 400 million years ago.",
+            "Wombat poop is cube-shaped to prevent it from rolling away.",
+            "A day on Venus is longer than a year on Venus.",
+            "There are more stars in the universe than grains of sand on all the Earth's beaches.",
+            "Sloths can hold their breath longer than dolphins—up to 40 minutes."
+        ];
+
+        function generateFact() {
+            const randomIndex = Math.floor(Math.random() * facts.length);
+            document.getElementById("fact").innerText = facts[randomIndex];
+        }
+
+        document.getElementById("generateFact").addEventListener("click", generateFact);
+    </script>
+</body>
+</html>
